@@ -1,0 +1,174 @@
+@charset "UTF-8";
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  font-family: "lato", sans-serif;
+  font-weight: 400;
+  /* font-size: 16px; */
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem; }
+
+.header {
+  height: 95vh;
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  background-size: cover;
+  background-position: top;
+  /* to make the shape of header we set the dirctions starting lef up side to rghit up and theard codinat is the shape down-left polygon(x y, x y, x y ) */
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+  position: relative; }
+  .header__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem; }
+  .header__logo {
+    height: 3.5rem; }
+  .header__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* will center all thins insaide the text box including the button*/
+    text-align: center; }
+
+/* want animation happen to logo when we hover the logo   */
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  /* fix for the littil shaking in animations*/
+  backface-visibility: hidden;
+  margin-bottom: 6rem; }
+  .heading-primary--main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-iteration-count: 3;
+    /* function defined the animation how will proceed (fast or slow )and specfied the paramter(see the doc )  */
+    animation-timing-function: ease-out;
+    /* before animation start to play it will be wait frist 3s*/
+    /* animation-delay: 3s; */
+    /* animation will heppen three times */
+    /* animation-iteration-count:3 ; */ }
+  .heading-primary--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+    /*we can use animation and css will figur out what means what */
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+    animation: moveRight 1s ease-out; }
+
+/* the secend type of animation allow to put more options and more complex */
+/* @keyframes nameofKey */
+@keyframes moveInLeft {
+  /* the animation start (initail state ) */
+  0% {
+    opacity: 0;
+    /* we use X becouse we want it from lef to right and also use negative number goes left and positave number goes rghit*/
+    transform: translateX(-10rem); }
+  /* 60% {
+        transform:rotate(180deg);
+    } */
+  /* at the moment where animation is at 80% (الارتداد اللي يرجع بالنهايه ) */
+  80% {
+    transform: translateX(1rem); }
+  /* the animation finsh  */
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
+/* the secend type of animation allow to put more options and more complex */
+/* @keyframes nameofKey */
+@keyframes moveInRight {
+  /* the animation start (initail state ) */
+  0% {
+    opacity: 0;
+    /* we use X becouse we want it from lef to right and also use negative number goes left and positave number goes rghit*/
+    transform: translateX(10rem); }
+  /* at the moment where animation is at 80% (الارتداد اللي يرجع بالنهايه ) */
+  80% {
+    transform: translateX(-1rem); }
+  /* the animation finsh  */
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
+.btn {
+  /* link pseudo-class: a special state of a selector, so this link is a state for button selector*/
+  /*we we click the button it's called active */
+  /* goes back behind the button (zoom-out and zoom-in animation button*/
+  /*to stop make button moveing when reload the page we use @keyframes */
+  /* @keyframes nameofKey */ }
+  .btn:link, .btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    /*we should always do display:... for give some paddings or heights*/
+    display: inline-block;
+    /* center the button*/
+    border-radius: 10rem;
+    /* animation */
+    transition: all .2s;
+    font-size: 1.6rem;
+    /*here the refernce to absulte use in btn-wight::aftter becouse he will use the first element with posstion reletive before him */
+    position: relative; }
+  .btn:hover {
+    /*we want it to move up(-numbers) or down(+numbers) we use Y and if we want it to move left(-numbers) or right(+numbers) use X */
+    transform: translateY(-0.3rem);
+    /* box-shadow: X  Y blur color; */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+    /* this is after element only when we have the button on hover state, so here we want the button is bigger when we hover it*/ }
+    .btn:hover::after {
+      /*scale for increase the element so when we make 2 it's will be dubole the size that is had before */
+      transform: scaleX(1.4) scaleY(1.7);
+      /*after transion on .btn::after the element will be fades out so opacity Zero (trick for fading somtiong out) */
+      opacity: 0; }
+  .btn:active {
+    /* related to inial btn:visted */
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+  .btn--white {
+    background-color: #fff;
+    color: #777; }
+    .btn--white::after {
+      background-color: #fff; }
+  .btn::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*z index definess the position of elements if they are one on top of another, so -1 it's behind the button  */
+    z-index: -1;
+    /* put initial state for .btn:hover::after */
+    transition: all .4s; }
+
+@keyframes moveInButton {
+  /* the animation start (initail state ) */
+  0% {
+    opacity: 0;
+    /* we use Y becouse we want it from up to down and also use negative number goes up and positave number goes down*/
+    transform: translateY(3rem); }
+  /* the animation finsh  */
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+  .btn--animated {
+    animation: moveInButton .5s ease-out .75s;
+    /* to prevent the btn visable before btn own animation and after headr animation */
+    /*animation-fill-mode: backwards; the styles up (we did't before up this class)  to 0% before the animation starts */
+    animation-fill-mode: backwards; }
